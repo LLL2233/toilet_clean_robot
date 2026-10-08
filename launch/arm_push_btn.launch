@@ -1,0 +1,30 @@
+<launch>
+  <!-- 默认使用当前 CPP；只有显式传入非空 launch 参数时才覆盖，避免历史参数残留。 -->
+  <arg name="button_approach_distance" default=""/>
+  <arg name="button_depth_reference_m" default=""/>
+  <arg name="button_depth_compensation_gain" default=""/>
+  <arg name="button_depth_max_shortening_m" default=""/>
+  <arg name="retreat_arm_start_delay_sec" default=""/>
+  <arg name="retreat_arm_wait_sec" default=""/>
+  <arg name="alignment_fine_tolerance_m" default=""/>
+  <arg name="alignment_coarse_threshold_m" default=""/>
+  <arg name="alignment_pulse_sec" default=""/>
+  <arg name="alignment_settle_sec" default=""/>
+  <arg name="alignment_startup_timeout_sec" default=""/>
+  <arg name="alignment_max_pulses" default=""/>
+  <node pkg="clean_toilet_robot" type="toilet_arm_push_btn_node" name="toilet_arm_push_btn_node" output="screen" clear_params="true">
+      <param name="tag" value="1" />
+      <param name="button_approach_distance" type="double" value="$(arg button_approach_distance)" if="$(eval arg('button_approach_distance') != '')"/>
+      <param name="button_depth_reference_m" type="double" value="$(arg button_depth_reference_m)" if="$(eval arg('button_depth_reference_m') != '')"/>
+      <param name="button_depth_compensation_gain" type="double" value="$(arg button_depth_compensation_gain)" if="$(eval arg('button_depth_compensation_gain') != '')"/>
+      <param name="button_depth_max_shortening_m" type="double" value="$(arg button_depth_max_shortening_m)" if="$(eval arg('button_depth_max_shortening_m') != '')"/>
+      <param name="retreat_arm_start_delay_sec" type="double" value="$(arg retreat_arm_start_delay_sec)" if="$(eval arg('retreat_arm_start_delay_sec') != '')"/>
+      <param name="retreat_arm_wait_sec" type="double" value="$(arg retreat_arm_wait_sec)" if="$(eval arg('retreat_arm_wait_sec') != '')"/>
+      <param name="alignment_fine_tolerance_m" type="double" value="$(arg alignment_fine_tolerance_m)" if="$(eval arg('alignment_fine_tolerance_m') != '')"/>
+      <param name="alignment_coarse_threshold_m" type="double" value="$(arg alignment_coarse_threshold_m)" if="$(eval arg('alignment_coarse_threshold_m') != '')"/>
+      <param name="alignment_pulse_sec" type="double" value="$(arg alignment_pulse_sec)" if="$(eval arg('alignment_pulse_sec') != '')"/>
+      <param name="alignment_settle_sec" type="double" value="$(arg alignment_settle_sec)" if="$(eval arg('alignment_settle_sec') != '')"/>
+      <param name="alignment_startup_timeout_sec" type="double" value="$(arg alignment_startup_timeout_sec)" if="$(eval arg('alignment_startup_timeout_sec') != '')"/>
+      <param name="alignment_max_pulses" type="int" value="$(arg alignment_max_pulses)" if="$(eval arg('alignment_max_pulses') != '')"/>
+  </node>
+</launch>

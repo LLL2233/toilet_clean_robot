@@ -1,0 +1,41 @@
+<launch>
+  <!-- 默认使用当前 CPP；只有显式传入非空 launch 参数时才覆盖，避免历史参数残留。 -->
+  <arg name="hover_home_start_delay_sec" default=""/>
+  <arg name="hover_home_wait_sec" default=""/>
+  <!-- 方案切换在 arm_hover.cpp 的“第三步”中进行：注释一段、取消另一段注释，然后重新编译。 -->
+  <!-- 底盘扫动参数：单侧 15 度，左右端之间约 30 度，最后大致回中。 -->
+  <arg name="hover_sweep_angle_deg" default=""/>
+  <arg name="hover_sweep_angular_speed" default=""/>
+  <arg name="hover_sweep_settle_sec" default=""/>
+  <arg name="hover_sweep_turn_timeout_sec" default=""/>
+  <arg name="hover_sweep_brake_lead_deg" default=""/>
+  <!-- 原来的 5 号舵机自旋参数：取消源码中的自旋动作注释后使用。 -->
+  <arg name="servo5_speed" default=""/>
+  <arg name="servo5_turn_wait" default=""/>
+  <arg name="servo5_return_wait" default=""/>
+  <arg name="alignment_fine_tolerance_m" default=""/>
+  <arg name="alignment_coarse_threshold_m" default=""/>
+  <arg name="alignment_pulse_sec" default=""/>
+  <arg name="alignment_settle_sec" default=""/>
+  <arg name="alignment_startup_timeout_sec" default=""/>
+  <arg name="alignment_max_pulses" default=""/>
+  <node pkg="clean_toilet_robot" type="toilet_arm_hover_node" name="toilet_arm_hover_node" output="screen" clear_params="true">
+      <param name="tag" value="1" />
+      <param name="servo5_speed" type="int" value="$(arg servo5_speed)" if="$(eval arg('servo5_speed') != '')"/>
+      <param name="servo5_turn_wait" type="double" value="$(arg servo5_turn_wait)" if="$(eval arg('servo5_turn_wait') != '')"/>
+      <param name="servo5_return_wait" type="double" value="$(arg servo5_return_wait)" if="$(eval arg('servo5_return_wait') != '')"/>
+      <param name="hover_home_start_delay_sec" type="double" value="$(arg hover_home_start_delay_sec)" if="$(eval arg('hover_home_start_delay_sec') != '')"/>
+      <param name="hover_home_wait_sec" type="double" value="$(arg hover_home_wait_sec)" if="$(eval arg('hover_home_wait_sec') != '')"/>
+      <param name="hover_sweep_angle_deg" type="double" value="$(arg hover_sweep_angle_deg)" if="$(eval arg('hover_sweep_angle_deg') != '')"/>
+      <param name="hover_sweep_angular_speed" type="double" value="$(arg hover_sweep_angular_speed)" if="$(eval arg('hover_sweep_angular_speed') != '')"/>
+      <param name="hover_sweep_settle_sec" type="double" value="$(arg hover_sweep_settle_sec)" if="$(eval arg('hover_sweep_settle_sec') != '')"/>
+      <param name="hover_sweep_turn_timeout_sec" type="double" value="$(arg hover_sweep_turn_timeout_sec)" if="$(eval arg('hover_sweep_turn_timeout_sec') != '')"/>
+      <param name="hover_sweep_brake_lead_deg" type="double" value="$(arg hover_sweep_brake_lead_deg)" if="$(eval arg('hover_sweep_brake_lead_deg') != '')"/>
+      <param name="alignment_fine_tolerance_m" type="double" value="$(arg alignment_fine_tolerance_m)" if="$(eval arg('alignment_fine_tolerance_m') != '')"/>
+      <param name="alignment_coarse_threshold_m" type="double" value="$(arg alignment_coarse_threshold_m)" if="$(eval arg('alignment_coarse_threshold_m') != '')"/>
+      <param name="alignment_pulse_sec" type="double" value="$(arg alignment_pulse_sec)" if="$(eval arg('alignment_pulse_sec') != '')"/>
+      <param name="alignment_settle_sec" type="double" value="$(arg alignment_settle_sec)" if="$(eval arg('alignment_settle_sec') != '')"/>
+      <param name="alignment_startup_timeout_sec" type="double" value="$(arg alignment_startup_timeout_sec)" if="$(eval arg('alignment_startup_timeout_sec') != '')"/>
+      <param name="alignment_max_pulses" type="int" value="$(arg alignment_max_pulses)" if="$(eval arg('alignment_max_pulses') != '')"/>
+  </node>
+</launch>
